@@ -1,0 +1,15 @@
+<% if @article %>
+  <%= form_tag({ :action => "merge_article", :id => @page }, :id => "merge_articles_form" ) do %>
+
+    <div class='seperator'>
+      <h4><%= _("Merge Articles") %></h4>
+      <div>
+        <label for="article">Article ID</label>
+        <%= text_field 'article_id', 'title', :class => 'span1', :style => ' width: 100px;', :placeholder => _('Article ID') %>
+      </div>
+      <div>
+      <%= save( _("Merge")) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

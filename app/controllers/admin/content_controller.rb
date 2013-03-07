@@ -139,6 +139,11 @@ class Admin::ContentController < Admin::BaseController
 
   def real_action_for(action); { 'add' => :<<, 'remove' => :delete}[action]; end
 
+  def merge_article
+    logger.debug "MERGE_ARTICLE in ze controller!"
+
+  end
+
   def new_or_edit
     id = params[:id]
     id = params[:article][:id] if params[:article] && params[:article][:id]
