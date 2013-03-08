@@ -113,6 +113,15 @@ class Admin::ContentController < Admin::BaseController
     render :text => nil
   end
 
+  def merge_article
+    puts "MERGE_ARTICLE in ze controller!"
+    puts "XHR? #{request.xhr?}"
+    #render :nothing => true
+    flash[:notice] = "Article merged!"
+
+    redirect_to "/admin/content/edit/#{params[:id]}"
+  end
+
   protected
 
   def get_fresh_or_existing_draft_for_article
@@ -139,10 +148,6 @@ class Admin::ContentController < Admin::BaseController
 
   def real_action_for(action); { 'add' => :<<, 'remove' => :delete}[action]; end
 
-  def merge_article
-    logger.debug "MERGE_ARTICLE in ze controller!"
-
-  end
 
   def new_or_edit
     id = params[:id]

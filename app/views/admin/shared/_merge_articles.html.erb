@@ -1,6 +1,11 @@
 <% if @article %>
-  <%= form_tag({ :action => "merge_article", :id => @page }, :id => "merge_articles_form" ) do %>
+  <%= form_tag({ :action => "merge_article", :id => @article.id }, :id => "merge_articles_form", :remote => true ) do %>
 
+    <!--
+      Article ID: <%= @article.id %>
+      Article: <%= @article.inspect %>
+    -->
+    
     <div class='seperator'>
       <h4><%= _("Merge Articles") %></h4>
       <div>
