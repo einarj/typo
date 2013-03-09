@@ -416,6 +416,12 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+  def merge(article)
+    merged_article = self.clone
+    merged_article.guid = "" # Force guid creation
+    #merged_article.body << article.body
+    merged_article.save
+  end
   protected
 
   def set_published_at

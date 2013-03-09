@@ -607,6 +607,20 @@ describe Admin::ContentController do
       end
     end
 
+    describe 'merge articles action' do
+
+      before do
+        @article1 = Factory(:article, :title => 'title1', :body => 'body1', :author => [Factory(:user)])
+        @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => [Factory(:user)])
+        post :merge_article, 'id' => @article1.id, 'merged_article' => {:id => @article2.id}
+      end
+
+      it 'should call merge_articles in the model' do
+        pending "Waiting for implementation of Article#merge"
+        response.should redirect_to(:action => 'edit', :id => @article2.id + 1)
+      end
+    end
+
   end
 
   describe 'with publisher connection' do

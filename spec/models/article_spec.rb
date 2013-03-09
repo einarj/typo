@@ -598,6 +598,20 @@ describe Article do
     end
   end
 
+  describe "article merging" do
+    before do
+      @article1 = Factory(:article, :title => 'title1', :body => 'body1', :author => [Factory(:user)])
+      @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => [Factory(:user)])
+    end
+
+    it "should create a new article" do
+
+      expect {
+        @article1.merge(@article2)
+      }.to change(Article, :count).by(1)
+    end
+  end
+
   describe "#get_or_build" do
     context "when no params given" do
       before(:each) do
