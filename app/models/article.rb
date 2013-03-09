@@ -417,7 +417,7 @@ class Article < Content
   end
 
   def merge_with(article)
-    self.body << article.body
+    self.body = self.body + article.body
     self.save
     article.destroy
     self

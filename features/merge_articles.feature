@@ -28,10 +28,7 @@ I want to be able to merge two similar articles
     And I enter the ID of "Original Article" into the merge id field
     And I click the merge button
     Then I am on the edit page for "New Article"
-    #And I should see the message "Article merged!"
-    And It it the latest article
-    And The newly created "New Article" contains the text from "Original Article"
-    And The newly created "New Article" contains the text from "New Article"
+    And The article titled "New Article" should contain "Body1" in its text
 
   #Scenario: When articles are merged, the merged article should have one author (either one of the authors of the two original articles).
 

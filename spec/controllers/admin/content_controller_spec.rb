@@ -612,10 +612,16 @@ describe Admin::ContentController do
       before do
         @article1 = Factory(:article, :title => 'title1', :body => 'body1', :author => [Factory(:user)])
         @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => [Factory(:user)])
-        post :merge_article, 'id' => @article1.id, 'merge_with' => @article2.id
       end
 
-      it 'should call merge_with on the model' do
+      #it 'should call merge_with on the model' do
+        #Article.any_instance.should_receive(:merge_with).once do
+          #post :merge_article, 'id' => @article1.id, 'merge_with' => @article2.id
+        #end
+      #end
+
+      it 'should redirect to the merged_article' do
+        post :merge_article, 'id' => @article1.id, 'merge_with' => @article2.id
         response.should redirect_to(:action => 'edit', :id => @article1.id )
       end
     end

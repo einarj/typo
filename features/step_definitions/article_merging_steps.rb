@@ -60,18 +60,22 @@ When /^I enter the ID of "(.*?)" into the merge id field$/ do |article|
   fill_in 'merged_article_id', :with => article.id
 end
 
-Then /^It it the latest article$/ do
-  id = current_url.split("/").last.to_i
-  article = Article.find_by_id(id)
-  id.should == Article.last.id
+#Then /^It it the latest article$/ do
+  #id = current_url.split("/").last.to_i
+  #article = Article.find_by_id(id)
+  #id.should == Article.last.id
 
-  source_article = Article.find_all_by_title(article.title).first
-  id.should_not == source_article.id
-end
+  #source_article = Article.find_all_by_title(article.title).first
+  #id.should_not == source_article.id
+#end
 
-Then /^The newly created "(.*?)" contains the text from "(.*?)"$/ do |title1, title2|
-  merged_article = Article.find_all_by_title(title1).last
-  source_article = Article.find_all_by_title(title2).first
+#Then /^The newly created "(.*?)" contains the text from "(.*?)"$/ do |title1, title2|
+  #merged_article = Article.find_all_by_title(title1).last
+  #source_article = Article.find_all_by_title(title2).first
 
-  merged_article.body.should include(source_article.body)
+#end
+
+Then /^The article titled "(.*?)" should contain "(.*?)" in its text$/ do |title, body|
+  merged_article = Article.find_by_title(title)
+  merged_article.body.should include(body)
 end
