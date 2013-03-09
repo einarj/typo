@@ -606,13 +606,13 @@ describe Article do
 
     it "should create a new article" do
       expect {
-        @article1.merge(@article2)
+        @article1.merge_with(@article2)
       }.to change(Article, :count).by(1)
     end
 
     describe "merged article" do
       before do
-        @merged_article = @article1.merge(@article2)
+        @merged_article = @article1.merge_with(@article2)
       end
 
       it "should contain the title of one of the articles" do

@@ -416,7 +416,7 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
-  def merge(article)
+  def merge_with(article)
     merged_article = self.clone
     merged_article.guid = "" # Force guid creation
     merged_article.body << article.body
