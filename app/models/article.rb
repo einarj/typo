@@ -421,7 +421,9 @@ class Article < Content
     merged_article.guid = "" # Force guid creation
     #merged_article.body << article.body
     merged_article.save
+    merged_article
   end
+
   protected
 
   def set_published_at
