@@ -618,6 +618,11 @@ describe Article do
       it "should contain the title of one of the articles" do
         @merged_article.title.should == @article1.title
       end
+
+      it "should contain the text of both articles" do
+        @merged_article.body.should include(@article1.body)
+        @merged_article.body.should include(@article2.body)
+      end
     end
   end
 
