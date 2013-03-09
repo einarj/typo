@@ -18,8 +18,8 @@ Given /^I am logged in as an admin$/ do
   click_button 'Login'
 end
 
-Given /^An article exists with the title: "(.*?)"$/ do |title|
-  a = Article.create!(:title => title)
+Given /^An article exists with the title: "(.*?)" and body: "(.*?)"$/ do |title, body|
+  a = Article.create!(:title => title, :body => body)
   puts "CREATED ARTICLE WITH ID: #{a.id}"
 end
 
@@ -50,6 +50,7 @@ When /^I click the merge button$/ do
 end
 
 Then /^I should see the message "(.*?)"$/ do |message|
+  debugger
   page.should have_selector(".notice")
   page.find(".notice").text.should == message
 end
@@ -64,7 +65,13 @@ Then /^It it the latest article$/ do
   article = Article.find_by_id(id)
   id.should == Article.last.id
 
-  source_articles = Article.find_all_by_title(article.title)
-  debugger
+  source_article = Article.find_all_by_title(article.title).first
   id.should_not == source_article.id
+end
+
+Then /^The newly created "(.*?)" contains the text from "(.*?)"$/ do |title1, title2|
+  merged_article = Article.find_all_by_title(title1).last
+  source_article = Article.find_all_by_title(title2).first
+
+  merged_article.body.should include(source_article.body)
 end
