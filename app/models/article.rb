@@ -418,6 +418,7 @@ class Article < Content
 
   def merge_with(article)
     self.body = self.body + article.body
+    article.comments.update_all(:article_id => self.id)
     self.save
     article.destroy
     self

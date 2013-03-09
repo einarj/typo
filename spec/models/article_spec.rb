@@ -613,6 +613,10 @@ describe Article do
 
     describe "merged article" do
       before do
+        @comment1 = Factory(:comment, :article => @article1)
+        @comment2 = Factory(:comment, :article => @article2)
+        @article1.comments.size.should == 1
+        @article2.comments.size.should == 1
         @merged_article = @article1.merge_with(@article2)
       end
 
@@ -623,6 +627,10 @@ describe Article do
       it "should contain the text of both articles" do
         @merged_article.body.should include(@article1.body)
         @merged_article.body.should include(@article2.body)
+      end
+
+      it 'should contain the comments from both articles' do
+        @merged_article.comments.size.should == 2
       end
     end
   end
