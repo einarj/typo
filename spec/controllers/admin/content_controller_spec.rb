@@ -615,8 +615,7 @@ describe Admin::ContentController do
         post :merge_article, 'id' => @article1.id, 'merged_article' => {:id => @article2.id}
       end
 
-      it 'should call merge_articles in the model' do
-        pending "Waiting for implementation of Article#merge"
+      it 'should call merge_with on the model' do
         response.should redirect_to(:action => 'edit', :id => @article2.id + 1)
       end
     end

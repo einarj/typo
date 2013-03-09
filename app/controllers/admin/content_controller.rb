@@ -114,12 +114,12 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge_article
-    puts "MERGE_ARTICLE in ze controller!"
-    puts "XHR? #{request.xhr?}"
-    #render :nothing => true
+    source_article1 = Article.find_by_id(params[:id])
+    source_article2 = Article.find_by_id(params[:merged_article][:id])
+    @article = source_article1.merge_with(source_article2)
     flash[:notice] = "Article merged!"
 
-    redirect_to "/admin/content/edit/#{params[:id]}"
+    redirect_to "/admin/content/edit/#{@article.id}"
   end
 
   protected
