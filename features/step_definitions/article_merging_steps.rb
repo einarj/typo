@@ -4,9 +4,10 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 
 Given /^an non\-admin user exists$/ do
-  User.create(
+  User.create!(
     :login => "nonadmin",
-    :password => "aaaaaaaa",
+    :password => "nonadmin",
+    :email => "nonadmin@example.com",
     :profile_id => 2,
     :state => 'active')
 end
@@ -37,10 +38,10 @@ Then /^I should be presented with a "(.*?)" input field$/ do |field_id|
   page.should have_field(field_id)
 end
 
-Given /^I am logged in a an user$/ do
+Given /^I am logged in as an user$/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'nonadmin'
-  fill_in 'user_password', :with => 'aaaaaaaa'
+  fill_in 'user_password', :with => 'nonadmin'
   click_button 'Login'
   #pending # express the regexp above with the code you wish you had
 end
@@ -50,7 +51,6 @@ When /^I click the merge button$/ do
 end
 
 Then /^I should see the message "(.*?)"$/ do |message|
-  debugger
   page.should have_selector(".notice")
   page.find(".notice").text.should == message
 end

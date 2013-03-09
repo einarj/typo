@@ -610,8 +610,10 @@ describe Admin::ContentController do
     describe 'merge articles action' do
 
       before do
-        @article1 = Factory(:article, :title => 'title1', :body => 'body1', :author => [Factory(:user)])
-        @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => [Factory(:user)])
+        #@user = Factory.create(:user)
+        @user = Factory(:user, :text_filter => Factory(:markdown), :profile => Factory(:profile_publisher))
+        @article1 = Factory(:article, :title => 'title1', :body => 'body1', :author => @user)
+        @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => @user)
       end
 
       #it 'should call merge_with on the model' do
@@ -624,6 +626,14 @@ describe Admin::ContentController do
         post :merge_article, 'id' => @article1.id, 'merge_with' => @article2.id
         response.should redirect_to(:action => 'edit', :id => @article1.id )
       end
+
+      it 'should redirect without merge for non-admin users' do
+        request.session = {:user => @user.id}
+        post :merge_article, 'id' => @article1.id, 'merge_with' => @article2.id
+        response.response_code.should == 403
+      end
+
+
     end
 
   end

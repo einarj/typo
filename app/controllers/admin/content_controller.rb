@@ -114,12 +114,16 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge_article
-    @article = Article.find_by_id(params[:id])
-    source_article2 = Article.find_by_id(params[:merge_with])
-    @article = @article.merge_with(source_article2)
-    flash[:notice] = "Article merged!"
+    if current_user.admin?
+      @article = Article.find_by_id(params[:id])
+      source_article2 = Article.find_by_id(params[:merge_with])
+      @article = @article.merge_with(source_article2)
+      flash[:notice] = "Article merged!"
 
-    redirect_to "/admin/content/edit/#{@article.id}"
+      redirect_to "/admin/content/edit/#{@article.id}"
+    else
+      head :forbidden
+    end
   end
 
   protected

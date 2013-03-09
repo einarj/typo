@@ -1,4 +1,4 @@
-<% if @article %>
+<% if @article and current_user.admin? %>
   <%= form_tag({ :action => "merge_article", :id => @article.id }, :id => "merge_articles_form", :remote => true ) do %>
 
     <!--

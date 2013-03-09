@@ -15,9 +15,8 @@ I want to be able to merge two similar articles
     And I should be presented with a "merged_article_id" input field
 
   Scenario: A non-admin cannot merge two articles
-    Given I am logged in a an user
-    And An article exists with the title: "Mergable article" and body: "Foo"
-    When I am on the edit page for "Mergable article"
+    Given I am logged in as an user
+    When I am on the new article page
     Then I should not be presented with a merge button
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
