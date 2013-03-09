@@ -612,7 +612,7 @@ describe Admin::ContentController do
       before do
         @article1 = Factory(:article, :title => 'title1', :body => 'body1', :author => [Factory(:user)])
         @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => [Factory(:user)])
-        post :merge_article, 'id' => @article1.id, 'merged_article' => {:id => @article2.id}
+        post :merge_article, 'id' => @article1.id, 'merge_with' => @article2.id
       end
 
       it 'should call merge_with on the model' do
