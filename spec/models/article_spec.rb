@@ -604,10 +604,11 @@ describe Article do
       @article2 = Factory(:article, :title => 'title2', :body => 'body2', :author => [Factory(:user)])
     end
 
-    it "should create a new article" do
+    it "should merge one article into the other" do
       expect {
         @article1.merge_with(@article2)
-      }.to change(Article, :count).by(1)
+        # The merged article gets deleted
+      }.to change(Article, :count).by(-1)
     end
 
     describe "merged article" do

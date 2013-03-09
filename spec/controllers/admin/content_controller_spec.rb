@@ -616,7 +616,7 @@ describe Admin::ContentController do
       end
 
       it 'should call merge_with on the model' do
-        response.should redirect_to(:action => 'edit', :id => @article2.id + 1)
+        response.should redirect_to(:action => 'edit', :id => @article1.id )
       end
     end
 

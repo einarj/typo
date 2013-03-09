@@ -417,11 +417,10 @@ class Article < Content
   end
 
   def merge_with(article)
-    merged_article = self.clone
-    merged_article.guid = "" # Force guid creation
-    merged_article.body << article.body
-    merged_article.save
-    merged_article
+    self.body << article.body
+    self.save
+    article.destroy
+    self
   end
 
   protected
