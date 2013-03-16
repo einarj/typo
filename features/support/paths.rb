@@ -20,6 +20,8 @@ module NavigationHelpers
     when /^the edit page for (.*)$/
       a = Article.last
       "/admin/content/edit/#{a.id}"
+    when /^the new page for (.*)$/
+      "/admin/#{$1}/new"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
